@@ -6,7 +6,7 @@ on:
 
 permissions:
   issues: write
-  
+
 jobs:
   label:
     runs-on: ubuntu-latest
@@ -14,22 +14,49 @@ jobs:
       - name: Auto assign labels
         uses: actions/github-script@v8
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const body = context.payload.issue.body.toLowerCase();
+
+            const body = (context.payload.issue.body || "").toLowerCase();
             const labels = [];
 
-            // ETAPA
+            function extractField(label) {
+              const regex = new RegExp(`### ${label}\\n([^\\n]+)`);
+              const match = body.match(regex);
+              return match ? match[1].trim() : null;
+            }
+
+            // ===== VERSIONES =====
+            const origen = extractField("versión actual (origen)");
+            const destino = extractField("versión destino");
+
+            if (origen?.includes("5")) labels.push("origen:5");
+            if (origen?.includes("6")) labels.push("origen:6");
+            if (origen?.includes("7")) labels.push("origen:7");
+
+            if (destino?.includes("7")) labels.push("destino:7");
+            if (destino?.includes("8")) labels.push("destino:8");
+            if (destino?.includes("9")) labels.push("destino:9");
+
+            // ===== RUTA (nivel pro) =====
+            if (origen && destino) {
+              const o = origen.match(/\d/);
+              const d = destino.match(/\d/);
+
+              if (o && d) {
+                const ruta = `ruta:${o[0]}-${d[0]}`;
+                labels.push(ruta);
+              }
+            }
+
+            // ===== ETAPA =====
             if (body.includes("planificación")) labels.push("etapa:planificacion");
             if (body.includes("instalación backend")) labels.push("etapa:backend");
             if (body.includes("instalación frontend")) labels.push("etapa:frontend");
             if (body.includes("migración de datos")) labels.push("etapa:datos");
             if (body.includes("personalizaciones")) labels.push("etapa:personalizaciones");
 
-            // VERSION
-            if (body.includes("7.x")) labels.push("versión:dspace7");
-            if (body.includes("8.x")) labels.push("versión:dspace8");
-            if (body.includes("9.x")) labels.push("versión:dspace9");
-
+            // ===== APLICAR LABELS =====
             if (labels.length > 0) {
               await github.rest.issues.addLabels({
                 owner: context.repo.owner,
