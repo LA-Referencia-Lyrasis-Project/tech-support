@@ -18,15 +18,16 @@ jobs:
           script: |
 
             const body = (context.payload.issue.body || "").toLowerCase();
-            const labels = [];
+            let labels = [];
 
+            // ===== UTILIDAD: EXTRAER CAMPOS =====
             function extractField(label) {
-              const regex = new RegExp(`### ${label}\\n([^\\n]+)`);
+              const regex = new RegExp(`### ${label}\\s*\\n([^\\n]+)`);
               const match = body.match(regex);
               return match ? match[1].trim() : null;
             }
 
-            // ===== VERSIONES =====
+            // ===== MIGRACIÓN: ORIGEN / DESTINO =====
             const origen = extractField("versión actual (origen)");
             const destino = extractField("versión destino");
 
@@ -38,16 +39,28 @@ jobs:
             if (destino?.includes("8")) labels.push("destino:8");
             if (destino?.includes("9")) labels.push("destino:9");
 
-            // ===== RUTA (nivel pro) =====
+            // ===== RUTA =====
             if (origen && destino) {
               const o = origen.match(/\d/);
               const d = destino.match(/\d/);
 
               if (o && d) {
-                const ruta = `ruta:${o[0]}-${d[0]}`;
-                labels.push(ruta);
+                labels.push(`ruta:${o[0]}-${d[0]}`);
               }
             }
+
+            // ===== VERSION GENERAL (instalación / incidencia) =====
+            let version = extractField("versión de dspace");
+
+            // fallback si no hay campo estructurado
+            if (!version) {
+              const versionMatch = body.match(/\b(7\.x|8\.x|9\.x)\b/);
+              version = versionMatch ? versionMatch[0] : null;
+            }
+
+            if (version?.includes("7")) labels.push("versión:dspace7");
+            if (version?.includes("8")) labels.push("versión:dspace8");
+            if (version?.includes("9")) labels.push("versión:dspace9");
 
             // ===== ETAPA =====
             if (body.includes("planificación")) labels.push("etapa:planificacion");
@@ -56,7 +69,10 @@ jobs:
             if (body.includes("migración de datos")) labels.push("etapa:datos");
             if (body.includes("personalizaciones")) labels.push("etapa:personalizaciones");
 
-            // ===== APLICAR LABELS =====
+            // ===== LIMPIEZA: eliminar duplicados =====
+            labels = [...new Set(labels)];
+
+            // ===== APLICAR =====
             if (labels.length > 0) {
               await github.rest.issues.addLabels({
                 owner: context.repo.owner,
