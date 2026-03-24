@@ -1,0 +1,124 @@
+name: ⚙️ Instalación DSpace
+description: Problemas técnicos durante una instalación nueva de DSpace
+title: "[Instalación] "
+labels:
+  - tipo:instalacion
+
+body:
+  - type: input
+    id: pais
+    attributes:
+      label: País de la institución
+      placeholder: Ej. México
+    validations:
+      required: true
+
+  - type: input
+    id: institucion
+    attributes:
+      label: Institución
+      placeholder: Nombre de la institución
+    validations:
+      required: true
+
+  - type: dropdown
+    id: version_dspace
+    attributes:
+      label: Versión de DSpace
+      options:
+        - 7.x
+        - 8.x
+        - 9.x
+    validations:
+      required: true
+
+  - type: dropdown
+    id: metodo_instalacion
+    attributes:
+      label: Método de instalación
+      options:
+        - Docker / Docker Compose
+        - Instalación manual (Maven + Tomcat)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: entorno
+    attributes:
+      label: Entorno donde estás instalando
+      options:
+        - Local (equipo personal)
+        - Servidor de pruebas
+        - Servidor de producción
+    validations:
+      required: true
+
+  - type: input
+    id: sistema_operativo
+    attributes:
+      label: Sistema operativo del servidor
+      placeholder: Ej. Ubuntu 22.04
+
+  - type: input
+    id: version_java
+    attributes:
+      label: Versión de Java
+      placeholder: Ej. OpenJDK 17
+
+  - type: input
+    id: version_solr
+    attributes:
+      label: Versión de Solr
+      placeholder: Ej. Solr 8.11.4
+
+  - type: input
+    id: base_datos
+    attributes:
+      label: Base de datos y versión
+      placeholder: Ej. PostgreSQL 14
+
+  - type: dropdown
+    id: etapa_instalacion
+    attributes:
+      label: ¿En qué etapa ocurre el problema?
+      options:
+        - Preparación del entorno (Java, Maven, Node, etc.)
+        - Compilación del backend (mvn package)
+        - Configuración base de datos
+        - Configuración de Solr
+        - Despliegue backend
+        - Despliegue frontend
+        - Configuración de servidor web
+    validations:
+      required: true
+
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Describe el problema
+      description: Explica qué ocurre y qué esperabas que ocurriera.
+    validations:
+      required: true
+
+  - type: textarea
+    id: pasos_reproducir
+    attributes:
+      label: Pasos ejecutados antes del error
+      description: Incluye comandos relevantes.
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs o mensajes de error
+      description: Copia solo la parte relevante.
+      render: shell
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: Revisé la documentación oficial antes de abrir el ticket.
+          required: true
+        - label: Verifiqué que mi entorno cumple los requisitos mínimos.
+          required: true
