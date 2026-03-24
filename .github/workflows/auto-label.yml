@@ -1,0 +1,37 @@
+name: Auto label issues
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto assign labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body.toLowerCase();
+            const labels = [];
+
+            // ETAPA
+            if (body.includes("planificación")) labels.push("etapa:planificacion");
+            if (body.includes("instalación backend")) labels.push("etapa:backend");
+            if (body.includes("instalación frontend")) labels.push("etapa:frontend");
+            if (body.includes("migración de datos")) labels.push("etapa:datos");
+            if (body.includes("personalizaciones")) labels.push("etapa:personalizaciones");
+
+            // VERSION
+            if (body.includes("7.x")) labels.push("versión:dspace7");
+            if (body.includes("8.x")) labels.push("versión:dspace8");
+            if (body.includes("9.x")) labels.push("versión:dspace9");
+
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: labels
+              });
+            }
