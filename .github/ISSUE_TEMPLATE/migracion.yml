@@ -1,0 +1,106 @@
+name: 🧩 Soporte de migración DSpace
+description: Problemas técnicos durante la migración de DSpace 5/6 → 8/9
+title: "[Migración] "
+labels:
+  - tipo:migracion
+
+body:
+  - type: input
+    id: pais
+    attributes:
+      label: País de la institución
+      placeholder: Ej. Argentina
+    validations:
+      required: true
+
+  - type: input
+    id: institucion
+    attributes:
+      label: Institución
+      placeholder: Nombre de la institución
+    validations:
+      required: true
+
+  - type: dropdown
+    id: version_origen
+    attributes:
+      label: Versión actual (origen)
+      options:
+        - 5.x
+        - 6.x
+        - 7.x
+        - 8.x
+    validations:
+      required: true
+
+  - type: dropdown
+    id: version_destino
+    attributes:
+      label: Versión destino
+      options:
+        - 8.x
+        - 9.x
+    validations:
+      required: true
+
+  - type: dropdown
+    id: etapa
+    attributes:
+      label: Etapa de la migración
+      description: Selecciona la etapa donde tienes el problema
+      options:
+        - Planificación
+        - Instalación Backend
+        - Instalación Frontend
+        - Migración de datos
+        - Personalizaciones
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo de solicitud
+      options:
+        - Es una consulta técnica
+        - La migración se encuentra detenida, necesito ayuda
+    validations:
+      required: true
+
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Describe el problema
+      description: Explica qué ocurre.
+      placeholder: Al ejecutar mvn package aparece...
+    validations:
+      required: true
+
+  - type: textarea
+    id: pasos_reproducir
+    attributes:
+      label: Pasos para reproducir el problema
+      description: Comandos ejecutados o acciones realizadas antes del error.
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs o mensajes de error
+      description: Copia aquí solo la parte relevante de los logs.
+      render: shell
+
+  - type: textarea
+    id: capturas
+    attributes:
+      label: Capturas de pantalla
+      description: Arrastra aquí screenshots si aplican.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: Revisé la documentación oficial antes de abrir el ticket.
+          required: true
+        - label: Busqué si el problema ya fue reportado anteriormente.
+          required: true
