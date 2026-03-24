@@ -1,0 +1,103 @@
+name: 🚨 Incidencia en DSpace en producción
+description: Reporte de problema en un DSpace ya funcional
+title: "[Incidencia] "
+labels:
+  - tipo:incidencia
+
+body:
+  - type: input
+    id: pais
+    attributes:
+      label: País de la institución
+      placeholder: Ej. Chile
+    validations:
+      required: true
+
+  - type: input
+    id: institucion
+    attributes:
+      label: Institución
+      placeholder: Nombre de la institución
+    validations:
+      required: true
+
+  - type: dropdown
+    id: version_dspace
+    attributes:
+      label: Versión de DSpace en uso
+      options:
+        - 7.x
+        - 8.x
+        - 9.x
+    validations:
+      required: true
+
+  - type: dropdown
+    id: entorno
+    attributes:
+      label: Entorno afectado
+      options:
+        - Producción
+        - Servidor de pruebas
+    validations:
+      required: true
+
+  - type: dropdown
+    id: modulo_afectado
+    attributes:
+      label: Módulo o área afectada
+      options:
+        - Autenticación / Login
+        - Envío de ítems
+        - Búsqueda
+        - Estadísticas
+        - OAI-PMH
+        - API REST
+        - Interfaz administrativa
+        - Otro
+    validations:
+      required: true
+
+  - type: dropdown
+    id: impacto
+    attributes:
+      label: Impacto del problema
+      description: Selecciona la opción que mejor describa la situación
+      options:
+        - El sistema no está accesible
+        - Una funcionalidad crítica no funciona
+        - Error visible para usuarios finales
+        - Problema menor o intermitente
+    validations:
+      required: true
+
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Describe el problema
+      description: Explica qué ocurre y qué debería ocurrir.
+    validations:
+      required: true
+
+  - type: textarea
+    id: cambios_recientes
+    attributes:
+      label: ¿Se realizaron cambios recientes?
+      description: Actualizaciones, configuraciones, nuevos módulos, etc.
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs relevantes
+      description: Copia solo la parte relevante.
+      render: shell
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: Verifiqué que el problema no está relacionado con mantenimiento programado.
+          required: true
+        - label: Revisé los logs antes de abrir el ticket.
+          required: true
