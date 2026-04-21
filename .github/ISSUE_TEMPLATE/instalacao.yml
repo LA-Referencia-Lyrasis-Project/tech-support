@@ -1,0 +1,121 @@
+name: ⚙️ Instalação DSpace
+description: Problemas técnicos durante uma instalação nova de DSpace
+title: "[Instalação] "
+labels:
+  - tipo:instalacion
+
+body:
+  - type: input
+    id: pais
+    attributes:
+      label: País da instituição
+      placeholder: Ex: Brasil
+    validations:
+      required: true
+
+  - type: input
+    id: instituicao
+    attributes:
+      label: Instituição
+      placeholder: Nome da instituição
+    validations:
+      required: true
+
+  - type: dropdown
+    id: versao_dspace
+    attributes:
+      label: Versão do DSpace
+      options:
+        - 7.x
+        - 8.x
+        - 9.x
+    validations:
+      required: true
+
+  - type: dropdown
+    id: metodo_instalacao
+    attributes:
+      label: Método de instalação
+      options:
+        - Docker / Docker Compose
+        - Instalação manual (Maven + Tomcat)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ambiente
+    attributes:
+      label: Ambiente
+      options:
+        - Local (máquina pessoal)
+        - Servidor de testes
+        - Servidor de produção
+    validations:
+      required: true
+
+  - type: input
+    id: sistema_operacional
+    attributes:
+      label: Sistema operacional
+      placeholder: Ex: Ubuntu 22.04
+
+  - type: input
+    id: versao_java
+    attributes:
+      label: Versão do Java
+      placeholder: Ex: OpenJDK 17
+
+  - type: input
+    id: versao_solr
+    attributes:
+      label: Versão do Solr
+      placeholder: Ex: Solr 8.11.4
+
+  - type: input
+    id: base_dados
+    attributes:
+      label: Base de dados e versão
+      placeholder: Ex: PostgreSQL 14
+
+  - type: dropdown
+    id: etapa_instalacao
+    attributes:
+      label: Em qual etapa ocorre o problema?
+      options:
+        - Preparação do ambiente
+        - Compilação do backend
+        - Configuração da base de dados
+        - Configuração do Solr
+        - Deploy do backend
+        - Deploy do frontend
+        - Configuração do servidor web
+    validations:
+      required: true
+
+  - type: textarea
+    id: descricao
+    attributes:
+      label: Descreva o problema
+    validations:
+      required: true
+
+  - type: textarea
+    id: passos
+    attributes:
+      label: Passos executados
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs ou erros
+      render: shell
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Confirmações
+      options:
+        - label: Revisei a documentação oficial.
+          required: true
+        - label: Verifiquei os requisitos mínimos.
+          required: true
