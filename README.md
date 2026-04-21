@@ -73,6 +73,10 @@ Ejemplos:
 
 ## 🔐 Reglas importantes
 
+### Tiempos
+- Desde que un issue llega a la plataforma se cuenta con al menos 24 horas para la primera respuesta de parte del soportista
+- Una vez que el issue abandona el estado de "Triage" y se encuentra el proceso, se estiman máximo 3 días hábiles para la siguiente comunicación
+
 ### ✅ Quién cierra los issues
 - **Solo el equipo de soporte** cierra los issues
 - El gestor del repositorio puede:
@@ -83,7 +87,7 @@ Ejemplos:
 ---
 
 ### ⏳ Issues sin respuesta
-- Si un issue permanece en estado **Esperando respuesta** durante un periodo prolongado
+- Si un issue permanece en estado **Esperando respuesta** durante más de 10 días hábiles
   sin retroalimentación, el soporte podrá cerrarlo como resuelto.
 - El issue puede reabrirse si el problema persiste.
 
