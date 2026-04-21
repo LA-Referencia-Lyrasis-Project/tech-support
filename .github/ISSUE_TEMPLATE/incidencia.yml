@@ -1,0 +1,86 @@
+name: 🚨 Incidente em DSpace
+description: Problemas em um DSpace já em produção
+title: "[Incidente] "
+labels:
+  - tipo:incidente
+
+body:
+  - type: input
+    id: pais
+    attributes:
+      label: País da instituição
+      placeholder: Ex: Brasil
+    validations:
+      required: true
+
+  - type: input
+    id: instituicao
+    attributes:
+      label: Instituição
+      placeholder: Nome da instituição
+    validations:
+      required: true
+
+  - type: dropdown
+    id: versao_dspace
+    attributes:
+      label: Versão do DSpace
+      options:
+        - 7.x
+        - 8.x
+        - 9.x
+    validations:
+      required: true
+
+  - type: dropdown
+    id: componente
+    attributes:
+      label: Componente afetado
+      options:
+        - Base de dados (PostgreSQL)
+        - Solr (índice de busca)
+        - Backend (API REST)
+        - Frontend (Angular)
+        - OAI-PMH
+        - Outro
+    validations:
+      required: true
+
+  - type: dropdown
+    id: impacto
+    attributes:
+      label: Impacto do problema
+      options:
+        - Funcionalidade específica não funciona
+        - Parte do sistema indisponível
+        - Sistema completamente indisponível
+    validations:
+      required: true
+
+  - type: textarea
+    id: descricao
+    attributes:
+      label: Descreva o problema
+    validations:
+      required: true
+
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como reproduzir o problema
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs relevantes
+      render: shell
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Confirmações
+      options:
+        - label: Revisei os logs antes de abrir o ticket.
+          required: true
+        - label: Verifiquei que os serviços estão ativos.
+          required: true
