@@ -75,7 +75,7 @@ body:
     id: base_dados
     attributes:
       label: Base de dados e versão
-      placeholder: Ex: PostgreSQL 14
+      placeholder: PostgreSQL 14
 
   - type: dropdown
     id: etapa_instalacao
