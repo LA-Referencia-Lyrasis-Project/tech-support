@@ -57,7 +57,7 @@ body:
     id: sistema_operacional
     attributes:
       label: Sistema operacional
-      placeholder: Ex: Ubuntu 22.04
+      placeholder: Ubuntu 22.04
 
   - type: input
     id: versao_java
