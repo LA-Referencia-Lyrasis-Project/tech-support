@@ -63,7 +63,7 @@ body:
     id: versao_java
     attributes:
       label: Versão do Java
-      placeholder: Ex: OpenJDK 17
+      placeholder: OpenJDK 17
 
   - type: input
     id: versao_solr
