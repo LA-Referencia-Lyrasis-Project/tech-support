@@ -1,0 +1,88 @@
+name: 🧩 Suporte de migração DSpace
+description: Problemas técnicos durante a migração de DSpace 5/6 → 8/9
+title: "[Migração] "
+labels:
+  - tipo:migracion
+
+body:
+  - type: input
+    id: pais
+    attributes:
+      label: País da instituição
+      placeholder: Ex: Brasil
+    validations:
+      required: true
+
+  - type: input
+    id: instituicao
+    attributes:
+      label: Instituição
+      placeholder: Nome da instituição
+    validations:
+      required: true
+
+  - type: dropdown
+    id: versao_origem
+    attributes:
+      label: Versão atual (origem)
+      options:
+        - 5.x
+        - 6.x
+        - 7.x
+    validations:
+      required: true
+
+  - type: dropdown
+    id: versao_destino
+    attributes:
+      label: Versão de destino
+      options:
+        - 7.x
+        - 8.x
+        - 9.x
+    validations:
+      required: true
+
+  - type: dropdown
+    id: etapa
+    attributes:
+      label: Etapa da migração
+      options:
+        - Planejamento
+        - Instalação Backend
+        - Instalação Frontend
+        - Migração de dados
+        - Personalizações
+    validations:
+      required: true
+
+  - type: textarea
+    id: descricao
+    attributes:
+      label: Descreva o problema
+      description: Explique o que está acontecendo.
+    validations:
+      required: true
+
+  - type: textarea
+    id: passos
+    attributes:
+      label: Passos para reproduzir
+      description: Comandos executados ou ações realizadas.
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs ou mensagens de erro
+      description: Inclua apenas a parte relevante.
+      render: shell
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Confirmações
+      options:
+        - label: Revisei a documentação antes de abrir o ticket.
+          required: true
+        - label: Verifiquei se o problema já foi reportado.
+          required: true
