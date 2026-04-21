@@ -69,7 +69,7 @@ body:
     id: versao_solr
     attributes:
       label: Versão do Solr
-      placeholder: Ex: Solr 8.11.4
+      placeholder: Solr 8.11.4
 
   - type: input
     id: base_dados
